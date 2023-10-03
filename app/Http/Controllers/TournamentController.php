@@ -37,12 +37,12 @@ class TournamentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
+        $request->validate(['name'=>'required','date'=>'required|date_format:Y-m-d','start_time'=>'required|date_format:H:i']);
         
         $tournament = new Tournament();
         $tournament->name = $request->name;
+        $tournament->date = $request->date;
+        $tournament->start_time = $request->start_time;
         $tournament->save();
         
         return redirect()->route('tournaments.index');
